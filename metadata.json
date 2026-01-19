@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Copy of Buddy in Korea - Coffee Chat with Global Friends",
+  "description": "Meet international friends in Seoul. Find your perfect conversation partner through our curated global community.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
