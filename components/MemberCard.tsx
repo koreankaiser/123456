@@ -9,58 +9,48 @@ interface MemberCardProps {
 
 const MemberCard: React.FC<MemberCardProps> = ({ member, onConnect }) => {
   return (
-    <div className="group relative bg-white overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 border border-stone-100 flex flex-col h-full">
+    <div className="group relative bg-white overflow-hidden rounded-[2.5rem] shadow-[0_15px_45px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(147,242,97,0.15)] transition-all duration-700 border border-lime-50 flex flex-col h-full transform hover:-translate-y-4">
       <div className="aspect-[3/4] overflow-hidden relative">
         <img 
           src={member.imageUrl} 
           alt={member.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
         />
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+        <div className="absolute inset-0 bg-gradient-to-t from-green-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
           <button 
             onClick={() => onConnect(member)}
-            className="w-full py-4 bg-white text-stone-900 rounded-xl font-bold text-base tracking-tight transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 hover:bg-stone-50 active:scale-95 flex flex-col items-center leading-tight shadow-xl"
+            className="w-full py-5 bg-[#93f261] text-black rounded-2xl font-black text-sm tracking-tight transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 hover:bg-white active:scale-95 shadow-2xl uppercase"
           >
-            <span className="serif italic">Let's Buddy</span>
-            <span className="text-[9px] opacity-60 font-medium uppercase tracking-widest mt-0.5">대화 신청하기</span>
+            Start Chat
           </button>
+        </div>
+        
+        <div className="absolute top-6 left-6 px-4 py-2 glass rounded-2xl shadow-sm border-white/50">
+            <span className="text-[10px] font-black text-green-900 uppercase tracking-widest">{member.locationKo.split(' ')[1]}</span>
         </div>
       </div>
       
-      <div className="p-6 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h3 className="text-xl font-bold text-stone-800 leading-none mb-2">{member.name}</h3>
-            <div className="flex flex-col space-y-1">
-              <p className="text-stone-400 text-[10px] font-bold uppercase tracking-widest">
-                {member.nationality} • {member.age}
-              </p>
-              <div className="flex items-center text-stone-500 text-[10px] font-semibold uppercase tracking-wider">
-                <svg className="w-2.5 h-2.5 mr-1 text-stone-300" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                <span>{member.locationKo}</span>
-                <span className="mx-1 opacity-30">/</span>
-                <span className="text-stone-300 italic font-normal normal-case">{member.location}</span>
-              </div>
+      <div className="p-8 flex flex-col flex-grow">
+        <div className="mb-6 flex justify-between items-start">
+            <div>
+              {/* 이름: 검은색 유지 */}
+              <h3 className="text-2xl font-black text-black leading-tight mb-1">{member.name}</h3>
+              {/* 국적: 검은색 유지 */}
+              <p className="text-black text-[11px] font-black uppercase tracking-[0.2em]">{member.nationality}</p>
             </div>
-          </div>
+            <span className="text-slate-300 text-xs font-black italic">#{member.age}</span>
         </div>
         
-        <div className="space-y-3 flex-grow">
-          <p className="text-stone-700 text-sm leading-relaxed font-medium">
-            {member.introKo}
-          </p>
-          <p className="text-stone-400 text-xs leading-relaxed italic border-l-2 border-stone-100 pl-3">
-            {member.intro}
-          </p>
-        </div>
+        {/* 한 줄 소개: 검은색/짙은 회색으로 변경 */}
+        <p className="text-slate-600 text-sm leading-relaxed font-medium line-clamp-2 mb-6 break-keep">
+          {member.introKo}
+        </p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        {/* 태그: 검은색 텍스트와 연한 배경 */}
+        <div className="mt-auto flex flex-wrap gap-2">
           {member.tags.map(tag => (
-            <span key={tag} className="px-2.5 py-1 bg-stone-50 text-stone-500 text-[10px] rounded-md uppercase tracking-wider font-bold border border-stone-100">
-              #{tag}
+            <span key={tag} className="px-3 py-1 bg-slate-100 text-black text-[9px] rounded-lg uppercase tracking-widest font-black border border-slate-200">
+              {tag}
             </span>
           ))}
         </div>
