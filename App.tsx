@@ -78,9 +78,9 @@ const App: React.FC = () => {
           </h2>
           
           <p className="max-w-xl mx-auto text-slate-500 text-lg sm:text-xl leading-relaxed font-medium mb-16 reveal break-keep" style={{animationDelay: '0.2s'}}>
-            서울에서 활동하는 글로벌 친구들과 <br/>
-            가장 트렌디한 커피챗을 시작해보세요.
-          </p>
+  혼자 읽고, 같이 나눠요. <br/>
+  책으로 연결되는 사람들.
+</p>
         </div>
 
         {/* Marquee effect */}
