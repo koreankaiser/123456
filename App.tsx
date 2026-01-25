@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user, loading, signInWithGoogle, signOut } = useAuth();
+  const { user, loading, signInWithKakao, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -40,7 +40,7 @@ const App: React.FC = () => {
            <h1 className="serif text-xl font-black text-black tracking-tighter">buddy.kr</h1>
         </div>
         <button 
-          onClick={() => user ? signOut() : signInWithGoogle()}
+         onClick={() => user ? signOut() : signInWithKakao()}
           className="bg-black text-[#93f261] px-6 py-2.5 rounded-full text-xs font-black tracking-tight hover:scale-105 transition-all active:scale-95 shadow-xl"
         >
           {loading ? 'LOADING...' : user ? 'LOGOUT' : 'LOGIN'}
