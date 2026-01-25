@@ -6,12 +6,14 @@ import MemberCard from './components/MemberCard';
 import ApplyModal from './components/ApplyModal';
 import ConnectModal from './components/ConnectModal';
 import AiHelper from './components/AiHelper';
+import { useAuth } from './hooks/useAuth';
 
 const App: React.FC = () => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, loading, signInWithGoogle, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -39,10 +41,10 @@ const App: React.FC = () => {
            <h1 className="serif text-xl font-black text-black tracking-tighter">buddy.kr</h1>
         </div>
         <button 
-          onClick={() => setIsApplyModalOpen(true)}
+          onClick={() => user ? signOut() : signInWithGoogle()}
           className="bg-black text-[#93f261] px-6 py-2.5 rounded-full text-xs font-black tracking-tight hover:scale-105 transition-all active:scale-95 shadow-xl"
         >
-          JOIN BUDDY
+          {loading ? 'LOADING...' : user ? 'LOGOUT' : 'LOGIN'}
         </button>
       </nav>
 
@@ -68,8 +70,8 @@ const App: React.FC = () => {
           </div>
 
           <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-lime-50 border border-lime-100 text-green-600 text-xs font-bold tracking-wide mb-12 reveal">
-  책으로 시작하는 만남
-</div>
+            책으로 시작하는 만남
+          </div>
           
           {/* Title Adjustment - Better Spacing & Font weights */}
           <h2 className="text-7xl sm:text-[9rem] font-black text-black mb-12 tracking-tighter leading-[0.8] reveal">
@@ -77,10 +79,10 @@ const App: React.FC = () => {
             <span className="text-[#93f261] block transform hover:scale-105 transition-transform duration-700">Buddies.</span>
           </h2>
           
-       <p className="max-w-xl mx-auto text-slate-500 text-lg sm:text-xl leading-relaxed font-medium mb-16 reveal break-keep" style={{animationDelay: '0.2s'}}>
-  혼자 읽고, 같이 나눠요. <br/>
-  책으로 연결되는 사람들.
-</p>
+          <p className="max-w-xl mx-auto text-slate-500 text-lg sm:text-xl leading-relaxed font-medium mb-16 reveal break-keep" style={{animationDelay: '0.2s'}}>
+            혼자 읽고, 같이 나눠요. <br/>
+            책으로 연결되는 사람들.
+          </p>
         </div>
 
         {/* Marquee effect */}
