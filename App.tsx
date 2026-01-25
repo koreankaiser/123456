@@ -6,7 +6,6 @@ import MemberCard from './components/MemberCard';
 import ApplyModal from './components/ApplyModal';
 import ConnectModal from './components/ConnectModal';
 import AiHelper from './components/AiHelper';
-import { useAuth } from './hooks/useAuth';
 
 const App: React.FC = () => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
