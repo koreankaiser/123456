@@ -19,11 +19,13 @@ export const useAuth = () => {
   }, []);
 
  const signInWithKakao = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'kakao',
-      options: { redirectTo: window.location.origin },
-    });
-  };
+  await supabase.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: { 
+      redirectTo: 'https://findbuddy2.vercel.app'
+    },
+  });
+};
 
   const signOut = async () => {
     await supabase.auth.signOut();
