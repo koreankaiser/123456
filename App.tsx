@@ -6,13 +6,16 @@ import ApplyModal from './components/ApplyModal';
 import ConnectModal from './components/ConnectModal';
 import AiHelper from './components/AiHelper';
 import { useAuth } from './hooks/useAuth';
+import { supabase } from './lib/supabase';
 import BookUploadForm from './components/BookUploadForm';
+import BookCard from './components/BookCard';
 
 const App: React.FC = () => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [books, setBooks] = useState<any[]>([]);
   const { user, loading, signInWithKakao, signOut } = useAuth();
 
   useEffect(() => {
@@ -21,9 +24,33 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const fetchBooks = async () => {
+    const { data, error } = await supabase
+      .from('books')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(6);
+    
+    if (data) {
+      setBooks(data);
+    }
+  };
+
   const handleConnect = (member: Member) => {
     setSelectedMember(member);
     setIsConnectModalOpen(true);
+  };
+
+  const handleBookRequest = async (bookId: string) => {
+    if (!user) {
+      alert('로그인이 필요합니다!');
+      return;
+    }
+    alert('매칭 요청 기능은 곧 추가됩니다! 🎉');
   };
 
   const marqueeBuddies = [...INITIAL_MEMBERS, ...INITIAL_MEMBERS, ...INITIAL_MEMBERS];
@@ -105,15 +132,21 @@ const App: React.FC = () => {
         )}
         
         <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 reveal" style={{animationDelay: '0.5s'}}>
-          <h3 className="serif text-5xl font-bold text-black tracking-tight">Active Buddies</h3>
-          {/* Sub-label color: BLACK */}
-          <p className="text-black text-[11px] font-black tracking-widest uppercase mt-4 sm:mt-0">Recently joined members in Seoul</p>
+          <h3 className="serif text-5xl font-bold text-black tracking-tight">Book Buddies</h3>
+          <p className="text-black text-[11px] font-black tracking-widest uppercase mt-4 sm:mt-0">최근 등록된 책들</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 reveal" style={{animationDelay: '0.6s'}}>
-          {INITIAL_MEMBERS.map(member => (
-            <MemberCard key={member.id} member={member} onConnect={handleConnect} />
-          ))}
+          {books.length > 0 ? (
+            books.map(book => (
+              <BookCard key={book.id} book={book} onRequest={handleBookRequest} />
+            ))
+          ) : (
+            <div className="col-span-3 text-center py-20">
+              <p className="text-slate-400 text-lg">아직 등록된 책이 없습니다 📚</p>
+              <p className="text-slate-400 text-sm mt-2">첫 번째로 책을 등록해보세요!</p>
+            </div>
+          )}
         </div>
       </main>
 
