@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { INITIAL_MEMBERS } from './constants';
 import { Member } from './types';
@@ -7,6 +6,8 @@ import ApplyModal from './components/ApplyModal';
 import ConnectModal from './components/ConnectModal';
 import AiHelper from './components/AiHelper';
 import { useAuth } from './hooks/useAuth';
+import BookUploadForm from './components/BookUploadForm';
+
 const App: React.FC = () => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
@@ -96,6 +97,13 @@ const App: React.FC = () => {
 
       {/* Grid Content */}
       <main className="flex-grow px-6 sm:px-12 pb-56 max-w-7xl mx-auto w-full">
+        {/* 로그인 후 책 등록 폼 */}
+        {user && (
+          <div className="mb-20">
+            <BookUploadForm />
+          </div>
+        )}
+        
         <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 reveal" style={{animationDelay: '0.5s'}}>
           <h3 className="serif text-5xl font-bold text-black tracking-tight">Active Buddies</h3>
           {/* Sub-label color: BLACK */}
