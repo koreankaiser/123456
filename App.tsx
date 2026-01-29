@@ -9,8 +9,10 @@ import { useAuth } from './hooks/useAuth';
 import { supabase } from './lib/supabase';
 import BookUploadForm from './components/BookUploadForm';
 import BookCard from './components/BookCard';
+import Dashboard from './components/Dashboard';
 
 const App: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<'home' | 'dashboard'>('home');
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [isConnectModalOpen, setIsConnectModalOpen] = useState(false);
@@ -55,6 +57,12 @@ const App: React.FC = () => {
 
   const marqueeBuddies = [...INITIAL_MEMBERS, ...INITIAL_MEMBERS, ...INITIAL_MEMBERS];
 
+  // 대시보드 페이지 표시
+  if (currentPage === 'dashboard') {
+    return <Dashboard onBack={() => setCurrentPage('home')} />;
+  }
+
+  // 홈 페이지 표시
   return (
     <div className="min-h-screen flex flex-col selection:bg-lime-200">
       {/* Navigation */}
@@ -67,12 +75,22 @@ const App: React.FC = () => {
            </div>
            <h1 className="serif text-xl font-black text-black tracking-tighter">buddy.kr</h1>
         </div>
-        <button 
-         onClick={() => user ? signOut() : signInWithKakao()}
-          className="bg-black text-[#93f261] px-6 py-2.5 rounded-full text-xs font-black tracking-tight hover:scale-105 transition-all active:scale-95 shadow-xl"
-        >
-          {loading ? 'LOADING...' : user ? 'LOGOUT' : 'LOGIN'}
-        </button>
+        <div className="flex items-center gap-3">
+          {user && (
+            <button 
+              onClick={() => setCurrentPage(currentPage === 'home' ? 'dashboard' : 'home')}
+              className="bg-[#93f261] text-black px-6 py-2.5 rounded-full text-xs font-black tracking-tight hover:scale-105 transition-all active:scale-95 shadow-xl"
+            >
+              {currentPage === 'home' ? '대시보드' : '홈'}
+            </button>
+          )}
+          <button 
+            onClick={() => user ? signOut() : signInWithKakao()}
+            className="bg-black text-[#93f261] px-6 py-2.5 rounded-full text-xs font-black tracking-tight hover:scale-105 transition-all active:scale-95 shadow-xl"
+          >
+            {loading ? 'LOADING...' : user ? 'LOGOUT' : 'LOGIN'}
+          </button>
+        </div>
       </nav>
 
       {/* Hero Section */}
