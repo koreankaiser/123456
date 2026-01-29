@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../lib/supabase';
+import BookEditModal from './BookEditModal';
 
 type TabType = 'myBooks' | 'receivedRequests' | 'sentRequests';
 
@@ -39,6 +40,8 @@ export default function Dashboard({ onBack }: DashboardProps) {
   const [receivedRequests, setReceivedRequests] = useState<MatchRequest[]>([]);
   const [sentRequests, setSentRequests] = useState<MatchRequest[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -102,6 +105,11 @@ export default function Dashboard({ onBack }: DashboardProps) {
       alert('매칭을 거절했습니다.');
       fetchReceivedRequests();
     }
+  };
+
+  const handleEditBook = (book: Book) => {
+    setEditingBook(book);
+    setIsEditModalOpen(true);
   };
 
   const handleDeleteBook = async (bookId: string) => {
@@ -221,6 +229,12 @@ export default function Dashboard({ onBack }: DashboardProps) {
                           </div>
                           <div className="flex flex-col gap-2">
                             <button
+                              onClick={() => handleEditBook(book)}
+                              className="px-4 py-2 bg-[#93f261] text-black rounded-lg hover:bg-[#7de34a] transition-all font-bold"
+                            >
+                              수정
+                            </button>
+                            <button
                               onClick={() => handleDeleteBook(book.id)}
                               className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all font-bold"
                             >
@@ -321,6 +335,17 @@ export default function Dashboard({ onBack }: DashboardProps) {
           )}
         </div>
       </div>
+
+      {/* 수정 모달 */}
+      <BookEditModal
+        book={editingBook}
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditingBook(null);
+        }}
+        onUpdate={fetchMyBooks}
+      />
     </div>
   );
 }
