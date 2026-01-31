@@ -285,4 +285,68 @@ export default function Dashboard({ onBack }: DashboardProps) {
               {activeTab === 'sentRequests' && (
                 <div className="space-y-6">
                   {sentRequests.length === 0 ? (
-                    <p className="text-center text-slate-400 py-12">보낸 요청이 없습니다.</
+                    <p className="text-center text-slate-400 py-12">보낸 요청이 없습니다.</p>
+                  ) : (
+                    sentRequests.map(request => (
+                      <div key={request.id} className="border-2 border-slate-200 rounded-2xl p-6">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="text-xl font-black text-black mb-2">
+                              📚 {request.books.book_title}
+                            </h3>
+                            <p className="text-sm text-slate-500 mb-3">{request.books.book_author}</p>
+                          </div>
+                          <div>
+                            {request.status === 'pending' && (
+                              <span className="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full text-sm font-bold">
+                                ⏳ 대기 중
+                              </span>
+                            )}
+                            {request.status === 'accepted' && (
+                              <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">
+                                ✅ 수락됨
+                              </span>
+                            )}
+                            {request.status === 'rejected' && (
+                              <span className="px-4 py-2 bg-red-100 text-red-700 rounded-full text-sm font-bold">
+                                ❌ 거절됨
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        {request.status === 'accepted' && (
+                          <div className="mt-4 p-4 bg-[#93f261] rounded-xl">
+                            <p className="font-bold text-black mb-2">🎉 오픈채팅방</p>
+                            <a 
+                              href={request.books.kakao_openchat_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:underline break-all"
+                            >
+                              {request.books.kakao_openchat_url}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* 수정 모달 */}
+      <BookEditModal
+        book={editingBook}
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditingBook(null);
+        }}
+        onUpdate={fetchMyBooks}
+      />
+    </div>
+  );
+}
