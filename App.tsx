@@ -102,6 +102,16 @@ const App: React.FC = () => {
     }
   };
 
+  // 유명한 책들 (떠다니는 효과용)
+  const floatingBooks = [
+    { title: '데미안', author: '헤르만 헤세', color: 'from-purple-400 to-pink-400' },
+    { title: '어린왕자', author: '생텍쥐페리', color: 'from-blue-400 to-cyan-400' },
+    { title: '1984', author: '조지 오웰', color: 'from-red-400 to-orange-400' },
+    { title: '82년생 김지영', author: '조남주', color: 'from-green-400 to-teal-400' },
+    { title: '미움받을 용기', author: '기시미 이치로', color: 'from-yellow-400 to-orange-400' },
+    { title: '해리포터', author: 'J.K. 롤링', color: 'from-indigo-400 to-purple-400' },
+  ];
+
   // 대시보드 페이지 표시
   if (currentPage === 'dashboard') {
     return <Dashboard onBack={() => setCurrentPage('home')} />;
@@ -138,7 +148,7 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section - Marquee 제거하고 간결하게 */}
+      {/* Hero Section */}
       <header className="relative pt-44 pb-20 overflow-hidden flex flex-col items-center">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
             <div className="absolute top-40 left-10 w-80 h-80 bg-lime-100 rounded-full blur-[120px] opacity-30 animate-float"></div>
@@ -175,8 +185,8 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* How it Works Section - 대폭 개선 */}
-      <section className="py-20 bg-gradient-to-b from-white to-slate-50">
+      {/* How it Works Section - 텍스트만 */}
+      <section className="py-24 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <span className="text-[#93f261] text-sm font-bold tracking-wider uppercase mb-4 block">
@@ -185,90 +195,79 @@ const App: React.FC = () => {
             <h2 className="text-5xl sm:text-6xl font-black text-black mb-4">
               세 단계로 시작하세요
             </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-              BookBuddy와 함께 책을 매개로 새로운 인연을 만나보세요
-            </p>
           </div>
 
-          <div className="space-y-24">
-            {/* Step 1 - 왼쪽 이미지, 오른쪽 텍스트 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
-                <img 
-                  src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&h=600&fit=crop" 
-                  alt="책 등록하기"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
+                <span className="text-4xl font-black text-black">1</span>
               </div>
-              <div className="order-1 lg:order-2">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
-                  <span className="text-3xl font-black text-black">1</span>
-                </div>
-                <h3 className="text-4xl font-black text-black mb-4">책 등록하기</h3>
-                <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  읽고 싶은 책의 제목과 저자를 입력하고,<br/>
-                  만나고 싶은 시간과 장소를 등록하세요.
-                </p>
-                <p className="text-slate-500 leading-relaxed">
-                  카페, 도서관, 공원 등 편한 장소를 선택할 수 있어요.<br/>
-                  카카오 오픈채팅 링크를 미리 준비해주세요!
-                </p>
-              </div>
+              <h3 className="text-2xl font-black text-black mb-4">책 등록하기</h3>
+              <p className="text-slate-600 leading-relaxed">
+                읽고 싶은 책과 만날 시간·장소를 등록하세요
+              </p>
             </div>
 
-            {/* Step 2 - 오른쪽 이미지, 왼쪽 텍스트 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="order-1">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
-                  <span className="text-3xl font-black text-black">2</span>
-                </div>
-                <h3 className="text-4xl font-black text-black mb-4">매칭 신청하기</h3>
-                <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  다른 사람이 등록한 책 중에서<br/>
-                  함께 읽고 싶은 책을 찾아보세요.
-                </p>
-                <p className="text-slate-500 leading-relaxed">
-                  마음에 드는 책이 있다면 "함께 읽기 신청" 버튼을 눌러<br/>
-                  매칭을 요청할 수 있어요. 상대방이 수락하면 연결됩니다!
-                </p>
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
+                <span className="text-4xl font-black text-black">2</span>
               </div>
-              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl order-2">
-                <img 
-                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=600&fit=crop" 
-                  alt="매칭 신청"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              </div>
+              <h3 className="text-2xl font-black text-black mb-4">매칭 신청</h3>
+              <p className="text-slate-600 leading-relaxed">
+                마음에 드는 책에 함께 읽기를 신청하세요
+              </p>
             </div>
 
-            {/* Step 3 - 왼쪽 이미지, 오른쪽 텍스트 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
-                <img 
-                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop" 
-                  alt="오픈채팅 공유"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
+                <span className="text-4xl font-black text-black">3</span>
               </div>
-              <div className="order-1 lg:order-2">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
-                  <span className="text-3xl font-black text-black">3</span>
-                </div>
-                <h3 className="text-4xl font-black text-black mb-4">오픈채팅으로 만나요</h3>
-                <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  매칭이 수락되면 대시보드에서<br/>
-                  오픈채팅 링크가 자동으로 공유됩니다.
-                </p>
-                <p className="text-slate-500 leading-relaxed">
-                  채팅방에 들어가서 약속을 잡고,<br/>
-                  책을 함께 읽으며 새로운 인연을 만들어보세요!
-                </p>
-              </div>
+              <h3 className="text-2xl font-black text-black mb-4">오픈채팅 공유</h3>
+              <p className="text-slate-600 leading-relaxed">
+                매칭이 수락되면 카톡방에서 만나요
+              </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 떠다니는 책 섹션 */}
+      <section className="relative py-32 bg-white overflow-hidden">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h2 className="text-5xl sm:text-6xl font-black text-black mb-6">
+            현재 {books.length}권의 책이<br/>
+            버디를 찾고 있어요!
+          </h2>
+          <p className="text-xl text-slate-600">
+            새로운 만남이 당신을 기다립니다.
+          </p>
+        </div>
+
+        {/* 떠다니는 책들 */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {floatingBooks.map((book, index) => (
+            <div
+              key={index}
+              className="absolute animate-float-slow"
+              style={{
+                top: `${Math.random() * 80}%`,
+                left: `${Math.random() * 90}%`,
+                animationDelay: `${index * 0.5}s`,
+                animationDuration: `${15 + index * 2}s`
+              }}
+            >
+              <div className={`w-32 h-44 bg-gradient-to-br ${book.color} rounded-2xl shadow-2xl p-4 flex flex-col justify-between transform hover:scale-110 transition-transform opacity-70 hover:opacity-100`}>
+                <div>
+                  <h4 className="text-white font-black text-sm mb-1 line-clamp-2">{book.title}</h4>
+                  <p className="text-white/80 text-xs">{book.author}</p>
+                </div>
+                <div className="h-1 w-full bg-white/30 rounded-full"></div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -343,6 +342,20 @@ const App: React.FC = () => {
 
       <ApplyModal isOpen={isApplyModalOpen} onClose={() => setIsApplyModalOpen(false)} />
       <ConnectModal member={selectedMember} isOpen={isConnectModalOpen} onClose={() => setIsConnectModalOpen(false)} />
+
+      <style>{`
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(5deg);
+          }
+        }
+        .animate-float-slow {
+          animation: float-slow 20s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
