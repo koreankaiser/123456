@@ -19,6 +19,7 @@ export default function BookCard({ book, onRequest }: BookCardProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('ko-KR', { 
+      timeZone: 'Asia/Seoul',
       month: 'long', 
       day: 'numeric',
       hour: '2-digit',
