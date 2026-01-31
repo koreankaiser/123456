@@ -11,9 +11,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       return;
     }
 
-    // 로컬 시간을 Date 객체로 만들고 UTC로 변환
-    const localDateTime = new Date(`${meetingDate}T${meetingTime}:00`);
-    const meetingDateTime = localDateTime.toISOString();
+    // 단순하게 문자열만 합치기
+    const meetingDateTime = `${meetingDate}T${meetingTime}:00`;
 
     const { error } = await supabase
       .from('books')
