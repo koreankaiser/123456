@@ -118,9 +118,9 @@ const App: React.FC = () => {
             책으로 시작하는 만남
           </div>
           
-          {/* Title Adjustment - Better Spacing & Font weights */}
+          {/* Title - Updated */}
           <h2 className="text-7xl sm:text-[9rem] font-black text-black mb-12 tracking-tighter leading-[0.8] reveal">
-            <span className="block mb-10 opacity-90">Meet your</span>
+            <span className="block mb-10 opacity-90">함께 읽는</span>
             <span className="text-[#93f261] block transform hover:scale-105 transition-transform duration-700">Buddies.</span>
           </h2>
           
@@ -140,21 +140,15 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Grid Content */}
+      {/* Grid Content - Reordered */}
       <main className="flex-grow px-6 sm:px-12 pb-56 max-w-7xl mx-auto w-full">
-        {/* 로그인 후 책 등록 폼 */}
-        {user && (
-          <div className="mb-20">
-            <BookUploadForm />
-          </div>
-        )}
-        
+        {/* 먼저 등록된 책들 보여주기 */}
         <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 reveal" style={{animationDelay: '0.5s'}}>
           <h3 className="serif text-5xl font-bold text-black tracking-tight">Book Buddies</h3>
           <p className="text-black text-[11px] font-black tracking-widest uppercase mt-4 sm:mt-0">최근 등록된 책들</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 reveal" style={{animationDelay: '0.6s'}}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 reveal mb-20" style={{animationDelay: '0.6s'}}>
           {books.length > 0 ? (
             books.map(book => (
               <BookCard key={book.id} book={book} onRequest={handleBookRequest} />
@@ -166,6 +160,13 @@ const App: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* 책 등록 폼은 아래로 */}
+        {user && (
+          <div className="mt-20">
+            <BookUploadForm />
+          </div>
+        )}
       </main>
 
       <AiHelper members={INITIAL_MEMBERS} />
