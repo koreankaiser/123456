@@ -39,7 +39,8 @@ export default function BookUploadForm() {
         return;
       }
 
-      const meetingDateTime = `${meetingDate}T${meetingTime}:00`;
+      // 한국 시간대(KST = UTC+9) 명시
+      const meetingDateTime = `${meetingDate}T${meetingTime}:00+09:00`;
 
       const { error } = await supabase
         .from('books')
