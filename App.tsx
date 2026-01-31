@@ -234,7 +234,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* 떠다니는 책 섹션 - 높이 증가 */}
+      {/* 떠다니는 책 섹션 */}
       <section className="relative py-56 bg-white overflow-hidden min-h-[600px]">
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-5xl sm:text-6xl font-black text-black mb-6">
@@ -271,28 +271,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Why BookBuddy Section */}
-      <section className="py-32 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl">
-            <span className="text-[#93f261] text-sm font-bold tracking-wider uppercase mb-4 block">
-              Vision
-            </span>
-            <h2 className="text-5xl sm:text-6xl font-black mb-8 leading-tight">
-              혼자 읽던 책,<br/>
-              함께 나누는 즐거움
-            </h2>
-            <p className="text-xl text-slate-300 leading-relaxed mb-8">
-              책은 혼자 읽어도 좋지만, 함께 나눌 때 더 깊은 의미를 갖습니다.
-            </p>
-            <p className="text-lg text-slate-400 leading-relaxed">
-              BookBuddy는 같은 책을 읽고 싶은 사람들을 연결하여<br/>
-              새로운 독서 경험을 만들어갑니다.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Grid Content */}
       <main className="flex-grow px-6 sm:px-12 pb-56 max-w-7xl mx-auto w-full">
         {/* 등록된 책들 */}
@@ -324,18 +302,25 @@ const App: React.FC = () => {
 
       <AiHelper members={INITIAL_MEMBERS} />
 
+      {/* Footer */}
       <footer className="py-24 bg-white border-t border-slate-50 px-8 text-center mt-auto">
         <div className="max-w-sm mx-auto">
           <div className="w-12 h-12 bg-black text-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
             <span className="font-black text-xl">B</span>
           </div>
-          <p className="text-slate-400 text-sm leading-relaxed mb-12 font-medium italic">
-            Connecting global souls in the heart of Korea.
+          <p className="text-slate-400 text-sm leading-relaxed mb-4 font-medium">
+            Book Buddies - 책으로 시작하는 새로운 만남
           </p>
-          <div className="flex justify-center space-x-10 text-slate-300 text-[10px] font-black tracking-[0.3em] uppercase">
+          <a 
+            href="mailto:swift25@naver.com" 
+            className="text-slate-500 text-sm hover:text-black transition-colors mb-12 block"
+          >
+            swift25@naver.com
+          </a>
+          <div className="flex justify-center space-x-10 text-slate-300 text-[10px] font-black tracking-[0.3em] uppercase mt-12">
             <a href="#" className="hover:text-black transition-colors">Instagram</a>
             <a href="#" className="hover:text-black transition-colors">Terms</a>
-            <a href="#" className="hover:text-black transition-colors">Contact</a>
+            <a href="mailto:swift25@naver.com" className="hover:text-black transition-colors">Contact</a>
           </div>
         </div>
       </footer>
