@@ -52,7 +52,54 @@ const App: React.FC = () => {
       alert('로그인이 필요합니다!');
       return;
     }
-    alert('매칭 요청 기능은 곧 추가됩니다! 🎉');
+
+    try {
+      // 1. 책 정보 가져오기 (책 주인이 누군지 확인)
+      const { data: bookData, error: bookError } = await supabase
+        .from('books')
+        .select('user_id')
+        .eq('id', bookId)
+        .single();
+
+      if (bookError) throw bookError;
+
+      // 2. 자기 자신의 책에는 신청 불가
+      if (bookData.user_id === user.id) {
+        alert('자신의 책에는 매칭 신청을 할 수 없습니다! 😅');
+        return;
+      }
+
+      // 3. 이미 신청했는지 확인
+      const { data: existingRequest } = await supabase
+        .from('match_requests')
+        .select('id')
+        .eq('book_id', bookId)
+        .eq('from_user_id', user.id)
+        .single();
+
+      if (existingRequest) {
+        alert('이미 매칭 신청한 책입니다! 📚');
+        return;
+      }
+
+      // 4. 매칭 요청 저장
+      const { error: insertError } = await supabase
+        .from('match_requests')
+        .insert({
+          book_id: bookId,
+          from_user_id: user.id,
+          to_user_id: bookData.user_id,
+          status: 'pending'
+        });
+
+      if (insertError) throw insertError;
+
+      alert('매칭 신청이 완료되었습니다! 🎉\n대시보드에서 진행 상황을 확인하세요.');
+      
+    } catch (error) {
+      console.error('매칭 신청 오류:', error);
+      alert('매칭 신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
   const marqueeBuddies = [...INITIAL_MEMBERS, ...INITIAL_MEMBERS, ...INITIAL_MEMBERS];
