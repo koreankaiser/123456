@@ -102,8 +102,6 @@ const App: React.FC = () => {
     }
   };
 
-  const marqueeBuddies = [...INITIAL_MEMBERS, ...INITIAL_MEMBERS, ...INITIAL_MEMBERS];
-
   // 대시보드 페이지 표시
   if (currentPage === 'dashboard') {
     return <Dashboard onBack={() => setCurrentPage('home')} />;
@@ -140,18 +138,17 @@ const App: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="relative pt-44 pb-32 overflow-hidden flex flex-col items-center">
+      {/* Hero Section - Marquee 제거하고 간결하게 */}
+      <header className="relative pt-44 pb-20 overflow-hidden flex flex-col items-center">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
             <div className="absolute top-40 left-10 w-80 h-80 bg-lime-100 rounded-full blur-[120px] opacity-30 animate-float"></div>
             <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-100 rounded-full blur-[120px] opacity-20 animate-float" style={{animationDelay: '1.5s'}}></div>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center px-6 flex flex-col items-center">
-          {/* Centered Green Icon Card - Fixed Alignment */}
+          {/* Centered Green Icon Card */}
           <div className="mb-16 reveal flex justify-center">
             <div className="relative">
-               {/* Background Layers - Ensuring Perfect Centering */}
                <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-[88%] h-full bg-slate-100 rounded-[2rem] -z-10 opacity-60 shadow-sm"></div>
                <div className="absolute top-[-20px] left-1/2 -translate-x-1/2 w-[75%] h-full bg-slate-50 rounded-[2rem] -z-20 opacity-40 shadow-sm"></div>
                
@@ -165,72 +162,111 @@ const App: React.FC = () => {
             책으로 시작하는 만남
           </div>
           
-          {/* Title - Updated */}
+          {/* Title */}
           <h2 className="text-7xl sm:text-[9rem] font-black text-black mb-12 tracking-tighter leading-[0.8] reveal">
             <span className="block mb-10 opacity-90">함께 읽는</span>
             <span className="text-[#93f261] block transform hover:scale-105 transition-transform duration-700">Buddies.</span>
           </h2>
           
-          <p className="max-w-xl mx-auto text-slate-500 text-lg sm:text-xl leading-relaxed font-medium mb-16 reveal break-keep" style={{animationDelay: '0.2s'}}>
+          <p className="max-w-xl mx-auto text-slate-500 text-lg sm:text-xl leading-relaxed font-medium reveal break-keep" style={{animationDelay: '0.2s'}}>
             혼자 읽고, 같이 나눠요. <br/>
             책으로 연결되는 사람들.
           </p>
         </div>
-
-        {/* Marquee effect */}
-        <div className="animate-scroll-left flex space-x-6 py-10 w-full reveal" style={{animationDelay: '0.4s'}}>
-          {marqueeBuddies.map((buddy, idx) => (
-            <div key={`${buddy.id}-${idx}`} className="w-24 h-24 sm:w-28 sm:h-28 rounded-[2rem] overflow-hidden shadow-lg border-2 border-white flex-shrink-0 transform transition-transform hover:scale-110 hover:rotate-3 grayscale hover:grayscale-0 duration-500 bg-white">
-              <img src={buddy.imageUrl} alt={buddy.name} className="w-full h-full object-cover" />
-            </div>
-          ))}
-        </div>
       </header>
 
-      {/* How it Works Section */}
-      <section className="py-32 bg-white">
+      {/* How it Works Section - 대폭 개선 */}
+      <section className="py-20 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
+          <div className="text-center mb-16">
             <span className="text-[#93f261] text-sm font-bold tracking-wider uppercase mb-4 block">
               How it Works
             </span>
-            <h2 className="text-5xl sm:text-6xl font-black text-black mb-6">
+            <h2 className="text-5xl sm:text-6xl font-black text-black mb-4">
               세 단계로 시작하세요
             </h2>
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+              BookBuddy와 함께 책을 매개로 새로운 인연을 만나보세요
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {/* Step 1 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-4xl font-black text-black">1</span>
+          <div className="space-y-24">
+            {/* Step 1 - 왼쪽 이미지, 오른쪽 텍스트 */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
+                <img 
+                  src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&h=600&fit=crop" 
+                  alt="책 등록하기"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>
-              <h3 className="text-2xl font-black text-black mb-4">책 등록하기</h3>
-              <p className="text-slate-600 leading-relaxed">
-                읽고 싶은 책과 만날 시간·장소를 등록하세요
-              </p>
+              <div className="order-1 lg:order-2">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
+                  <span className="text-3xl font-black text-black">1</span>
+                </div>
+                <h3 className="text-4xl font-black text-black mb-4">책 등록하기</h3>
+                <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                  읽고 싶은 책의 제목과 저자를 입력하고,<br/>
+                  만나고 싶은 시간과 장소를 등록하세요.
+                </p>
+                <p className="text-slate-500 leading-relaxed">
+                  카페, 도서관, 공원 등 편한 장소를 선택할 수 있어요.<br/>
+                  카카오 오픈채팅 링크를 미리 준비해주세요!
+                </p>
+              </div>
             </div>
 
-            {/* Step 2 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-4xl font-black text-black">2</span>
+            {/* Step 2 - 오른쪽 이미지, 왼쪽 텍스트 */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="order-1">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
+                  <span className="text-3xl font-black text-black">2</span>
+                </div>
+                <h3 className="text-4xl font-black text-black mb-4">매칭 신청하기</h3>
+                <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                  다른 사람이 등록한 책 중에서<br/>
+                  함께 읽고 싶은 책을 찾아보세요.
+                </p>
+                <p className="text-slate-500 leading-relaxed">
+                  마음에 드는 책이 있다면 "함께 읽기 신청" 버튼을 눌러<br/>
+                  매칭을 요청할 수 있어요. 상대방이 수락하면 연결됩니다!
+                </p>
               </div>
-              <h3 className="text-2xl font-black text-black mb-4">매칭 신청</h3>
-              <p className="text-slate-600 leading-relaxed">
-                마음에 드는 책에 함께 읽기를 신청하세요
-              </p>
+              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl order-2">
+                <img 
+                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=600&fit=crop" 
+                  alt="매칭 신청"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              </div>
             </div>
 
-            {/* Step 3 */}
-            <div className="text-center">
-              <div className="w-20 h-20 bg-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-4xl font-black text-black">3</span>
+            {/* Step 3 - 왼쪽 이미지, 오른쪽 텍스트 */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
+                <img 
+                  src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=600&fit=crop" 
+                  alt="오픈채팅 공유"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>
-              <h3 className="text-2xl font-black text-black mb-4">오픈채팅 공유</h3>
-              <p className="text-slate-600 leading-relaxed">
-                매칭이 수락되면 카톡방에서 만나요
-              </p>
+              <div className="order-1 lg:order-2">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#93f261] rounded-2xl mb-6 shadow-lg">
+                  <span className="text-3xl font-black text-black">3</span>
+                </div>
+                <h3 className="text-4xl font-black text-black mb-4">오픈채팅으로 만나요</h3>
+                <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                  매칭이 수락되면 대시보드에서<br/>
+                  오픈채팅 링크가 자동으로 공유됩니다.
+                </p>
+                <p className="text-slate-500 leading-relaxed">
+                  채팅방에 들어가서 약속을 잡고,<br/>
+                  책을 함께 읽으며 새로운 인연을 만들어보세요!
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -258,15 +294,15 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Grid Content - Reordered */}
+      {/* Grid Content */}
       <main className="flex-grow px-6 sm:px-12 pb-56 max-w-7xl mx-auto w-full">
-        {/* 먼저 등록된 책들 보여주기 */}
-        <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 reveal pt-20" style={{animationDelay: '0.5s'}}>
+        {/* 등록된 책들 */}
+        <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 pt-20">
           <h3 className="serif text-5xl font-bold text-black tracking-tight">Book Buddies</h3>
           <p className="text-black text-[11px] font-black tracking-widest uppercase mt-4 sm:mt-0">최근 등록된 책들</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 reveal mb-20" style={{animationDelay: '0.6s'}}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 mb-20">
           {books.length > 0 ? (
             books.map(book => (
               <BookCard key={book.id} book={book} onRequest={handleBookRequest} />
@@ -279,7 +315,7 @@ const App: React.FC = () => {
           )}
         </div>
 
-        {/* 책 등록 폼은 아래로 */}
+        {/* 책 등록 폼 */}
         {user && (
           <div className="mt-20">
             <BookUploadForm />
