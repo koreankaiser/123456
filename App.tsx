@@ -234,8 +234,8 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* 떠다니는 책 섹션 */}
-      <section className="relative py-32 bg-white overflow-hidden">
+      {/* 떠다니는 책 섹션 - 높이 증가 */}
+      <section className="relative py-56 bg-white overflow-hidden min-h-[600px]">
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-5xl sm:text-6xl font-black text-black mb-6">
             현재 {books.length}권의 책이<br/>
