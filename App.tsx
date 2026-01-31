@@ -187,10 +187,81 @@ const App: React.FC = () => {
         </div>
       </header>
 
+      {/* How it Works Section */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <span className="text-[#93f261] text-sm font-bold tracking-wider uppercase mb-4 block">
+              How it Works
+            </span>
+            <h2 className="text-5xl sm:text-6xl font-black text-black mb-6">
+              세 단계로 시작하세요
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="w-20 h-20 bg-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-4xl font-black text-black">1</span>
+              </div>
+              <h3 className="text-2xl font-black text-black mb-4">책 등록하기</h3>
+              <p className="text-slate-600 leading-relaxed">
+                읽고 싶은 책과 만날 시간·장소를 등록하세요
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="w-20 h-20 bg-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-4xl font-black text-black">2</span>
+              </div>
+              <h3 className="text-2xl font-black text-black mb-4">매칭 신청</h3>
+              <p className="text-slate-600 leading-relaxed">
+                마음에 드는 책에 함께 읽기를 신청하세요
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="w-20 h-20 bg-[#93f261] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <span className="text-4xl font-black text-black">3</span>
+              </div>
+              <h3 className="text-2xl font-black text-black mb-4">오픈채팅 공유</h3>
+              <p className="text-slate-600 leading-relaxed">
+                매칭이 수락되면 카톡방에서 만나요
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why BookBuddy Section */}
+      <section className="py-32 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl">
+            <span className="text-[#93f261] text-sm font-bold tracking-wider uppercase mb-4 block">
+              Vision
+            </span>
+            <h2 className="text-5xl sm:text-6xl font-black mb-8 leading-tight">
+              혼자 읽던 책,<br/>
+              함께 나누는 즐거움
+            </h2>
+            <p className="text-xl text-slate-300 leading-relaxed mb-8">
+              책은 혼자 읽어도 좋지만, 함께 나눌 때 더 깊은 의미를 갖습니다.
+            </p>
+            <p className="text-lg text-slate-400 leading-relaxed">
+              BookBuddy는 같은 책을 읽고 싶은 사람들을 연결하여<br/>
+              새로운 독서 경험을 만들어갑니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Grid Content - Reordered */}
       <main className="flex-grow px-6 sm:px-12 pb-56 max-w-7xl mx-auto w-full">
         {/* 먼저 등록된 책들 보여주기 */}
-        <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 reveal" style={{animationDelay: '0.5s'}}>
+        <div className="flex flex-col sm:flex-row items-baseline justify-between mb-16 px-4 reveal pt-20" style={{animationDelay: '0.5s'}}>
           <h3 className="serif text-5xl font-bold text-black tracking-tight">Book Buddies</h3>
           <p className="text-black text-[11px] font-black tracking-widest uppercase mt-4 sm:mt-0">최근 등록된 책들</p>
         </div>
