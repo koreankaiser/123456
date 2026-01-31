@@ -35,12 +35,18 @@ export default function BookEditModal({ book, isOpen, onClose, onUpdate }: BookE
 
   useEffect(() => {
     if (book) {
+      // UTC 시간을 로컬 시간으로 변환하여 datetime-local input에 맞게 설정
+      const date = new Date(book.meeting_date);
+      const localDateTime = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        .toISOString()
+        .slice(0, 16); // "YYYY-MM-DDTHH:mm" 형식
+
       setFormData({
         book_title: book.book_title,
         book_author: book.book_author,
         book_description: book.book_description,
         book_cover: book.book_cover || '',
-        meeting_date: book.meeting_date,
+        meeting_date: localDateTime,
         location_city: book.location_city,
         location_district: book.location_district,
         kakao_openchat_url: book.kakao_openchat_url
@@ -54,9 +60,16 @@ export default function BookEditModal({ book, isOpen, onClose, onUpdate }: BookE
 
     setLoading(true);
 
+    // datetime-local 값을 ISO 형식으로 변환
+    const localDateTime = new Date(formData.meeting_date);
+    const meetingDateTime = localDateTime.toISOString();
+
     const { error } = await supabase
       .from('books')
-      .update(formData)
+      .update({
+        ...formData,
+        meeting_date: meetingDateTime
+      })
       .eq('id', book.id);
 
     if (error) {
