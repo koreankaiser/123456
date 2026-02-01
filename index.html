@@ -1,77 +1,72 @@
+
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#93f261" />
-    
-    <!-- SEO -->
-    <meta name="description" content="책으로 시작하는 새로운 만남 - BookBuddy. 같은 책을 읽고 싶은 사람들을 연결하는 독서 커뮤니티" />
-    <meta name="keywords" content="독서모임, 책모임, 북클럽, 독서친구, 책친구, BookBuddy, 북버디" />
-    
-    <!-- Open Graph (카카오톡, 페이스북, 인스타그램) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="BookBuddy" />
-    <meta property="og:title" content="BookBuddy - 북버디" />
-    <meta property="og:description" content="책으로 시작하는 새로운 만남. 같은 책을 읽고 싶은 사람들을 연결합니다." />
-    <meta property="og:image" content="https://findbuddy.kr/logo.jpg" />
-    <meta property="og:url" content="https://findbuddy.kr" />
-    <meta property="og:locale" content="ko_KR" />
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="BookBuddy - 북버디" />
-    <meta name="twitter:description" content="책으로 시작하는 새로운 만남" />
-    <meta name="twitter:image" content="https://findbuddy.kr/logo.jpg" />
-    
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <title>BookBuddy - 책으로 시작하는 새로운 만남</title>
-  </head>
-  <body>
-    <noscript>JavaScript를 활성화해주세요.</noscript>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddy | Global Connections</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Serif KR', serif;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            color: #000000;
+        }
+        .serif { font-family: 'Noto Serif KR', serif; }
+        
+        /* 커스텀 애니메이션 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; animation: fade-up 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll-left {
+            display: flex;
+            width: max-content;
+            animation: scroll-left 60s linear infinite;
+        }
+
+        /* 글래스모피즘 */
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* 스크롤바 */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f9f9f9; }
+        ::-webkit-scrollbar-thumb { background: #000000; border-radius: 10px; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+</head>
+<body>
     <div id="root"></div>
-  </body>
+    <script type="module" src="/index.tsx"></script>
+</body>
 </html>
-```
-
----
-
-## ✅ 작업 순서
-
-1. **로고 파일을 `public/logo.jpg`로 저장**
-2. **index.html 수정** (위 코드 복사)
-3. **커밋 & 푸시**
-4. **Vercel 자동 배포 대기** (1-2분)
-5. **테스트:**
-   - 카카오톡에 `https://findbuddy.kr` 링크 보내기
-   - 미리보기 확인!
-
----
-
-## 🔍 캐시 문제 해결
-
-**링크 미리보기가 업데이트 안 되면:**
-
-### **카카오톡 캐시 삭제:**
-- https://developers.kakao.com/tool/debugger/sharing
-- URL 입력: `https://findbuddy.kr`
-- **"캐시 초기화"** 클릭
-
-### **페이스북 디버거:**
-- https://developers.facebook.com/tools/debug/
-- URL 입력 후 캐시 초기화
-
----
-
-## 💡 예상 결과
-
-**카카오톡/인스타/페이스북에서:**
-```
-[로고 이미지]
-BookBuddy - 북버디
-책으로 시작하는 새로운 만남. 같은 책을 읽고 싶은 사람들을 연결합니다.
-findbuddy.kr
